@@ -30,7 +30,7 @@ public class OrdersResource {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
         EntityManager manager = factory.createEntityManager();
         TypedQuery<Order> query = manager.createQuery("SELECT O FROM Order O ", Order.class);
-        ArrayList<Order> list = (ArrayList<Order>) query.getResultList();
-        return list;
+        ArrayList<Order> listOrder = (ArrayList<Order>) query.getResultList();
+        return listOrder;
     }
 }
