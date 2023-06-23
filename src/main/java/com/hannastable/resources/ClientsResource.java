@@ -27,7 +27,7 @@ public class ClientsResource {
     public Client createClient(Client client) throws Exception {
         ClientsService clientsService = new ClientsService();
         Client returnedClient = clientsService.createClient(client);
-        return returnedClient ;
+        return returnedClient;
     }
 
     @GET
