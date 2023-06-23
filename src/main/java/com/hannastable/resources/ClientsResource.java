@@ -10,7 +10,7 @@ import net.bytebuddy.asm.MemberSubstitution;
 import java.util.ArrayList;
 
 @Path("/clients")
-@Produces(value =MediaType.APPLICATION_JSON)
+@Produces(value = MediaType.APPLICATION_JSON)
 @Consumes(value = MediaType.APPLICATION_JSON)
 public class ClientsResource {
 
@@ -27,7 +27,7 @@ public class ClientsResource {
     public Client createClient(Client client) throws Exception {
         ClientsService clientsService = new ClientsService();
         Client returnedClient = clientsService.createClient(client);
-        return returnedClient;
+        return returnedClient ;
     }
 
     @GET
