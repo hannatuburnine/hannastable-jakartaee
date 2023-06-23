@@ -1,6 +1,7 @@
 package com.hannastable.resources;
 
 import com.hannastable.models.Client;
+import com.hannastable.services.ClientsService;
 import jakarta.persistence.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -23,16 +24,10 @@ public class ClientsResource {
     }
 
     @POST
-    public void createClient(Client client) throws Exception {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
-        if (client.getName().length() <= 10 && client.getName().) {
-            manager.persist(client);
-        } else {
-            throw new Exception("Invalid Name");
-        }
-        manager.getTransaction().commit();
+    public Client createClient(Client client) throws Exception {
+        ClientsService clientsService = new ClientsService();
+        Client returnedClient = clientsService.createClient(client);
+        return returnedClient;
     }
 
     @GET
