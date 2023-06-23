@@ -29,7 +29,7 @@ public class OrdersResource {
     public ArrayList<Order> getAllOrders(){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
         EntityManager manager = factory.createEntityManager();
-        TypedQuery<Order> query = manager.createQuery("SELECT O FROM Order O ", Order.class);
+        TypedQuery<Order> query = manager.createQuery("SELECT D FROM Order D JOIN D.client", Order.class);
         ArrayList<Order> listOrder = (ArrayList<Order>) query.getResultList();
         return listOrder;
     }

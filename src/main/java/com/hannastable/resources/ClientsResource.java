@@ -23,11 +23,15 @@ public class ClientsResource {
     }
 
     @POST
-    public void createClient(Client client) {
+    public void createClient(Client client) throws Exception {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();
-        manager.persist(client);
+        if (client.getName().length() <= 10 && client.getName().) {
+            manager.persist(client);
+        } else {
+            throw new Exception("Invalid Name");
+        }
         manager.getTransaction().commit();
     }
 
