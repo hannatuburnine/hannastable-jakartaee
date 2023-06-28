@@ -1,5 +1,6 @@
 package com.hannastable.resources;
 
+import com.hannastable.daos.ClientsDao;
 import com.hannastable.models.Client;
 import com.hannastable.services.ClientsService;
 import jakarta.persistence.*;
@@ -16,11 +17,9 @@ public class ClientsResource {
 
     @GET
     public ArrayList<Client> getAllClients() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C", Client.class);
-        ArrayList<Client> list = (ArrayList<Client>) query.getResultList();
-        return list;
+        ClientsService clientsService = new ClientsService();
+        ArrayList<Client> clientList = clientsService.getAllClients();
+        return clientList;
     }
 
     @POST
@@ -33,12 +32,9 @@ public class ClientsResource {
     @GET
     @Path("/{id}")
     public Client getOneClient(@PathParam("id") int id) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClient", Client.class);
-        query.setParameter("idOfTheClient", id);
-        Client client = query.getSingleResult();
-        return client;
+        ClientsService clientsService = new ClientsService();
+        Client returnedClient = clientsService.getOneClient(id);
+        return null;
     }
 
     @DELETE
