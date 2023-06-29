@@ -30,9 +30,35 @@ public class ClientsDao {
     public Client getOneClient(int id){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
         EntityManager manager = factory.createEntityManager();
-        TypedQuery query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClient", Client.class);
+        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClient", Client.class);
         query.setParameter("idOfTheClient", id);
         Client client = (Client) query.getSingleResult();
         return client;
     }
+
+    public Client deleteClient(int id){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfThePersonToBeDeleted", Client.class);
+        query.setParameter("idOfThePersonToBeDeleted", id);
+        Client client = query.getSingleResult();
+        manager.remove(client);
+        manager.getTransaction().commit();
+        return null;
+    }
+
+    public Client updateClient(int id, Client updatedInfo){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClientToBeUpdated", Client.class);
+        query.setParameter("idOfTheClientToBeUpdated", id);
+        Client client = query.getSingleResult();
+        client.setName(updatedInfo.getName());
+        manager.merge(client);
+        manager.getTransaction().commit();
+        return client;
+    }
+
 }

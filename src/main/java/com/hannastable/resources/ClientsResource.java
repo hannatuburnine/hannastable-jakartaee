@@ -34,34 +34,22 @@ public class ClientsResource {
     public Client getOneClient(@PathParam("id") int id) {
         ClientsService clientsService = new ClientsService();
         Client returnedClient = clientsService.getOneClient(id);
-        return null;
+        return returnedClient;
     }
 
     @DELETE
     @Path("/{id}")
     public void deleteClient(@PathParam("id") int id) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
-        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idDaPessoaASerPesquisada", Client.class);
-        query.setParameter("idDaPessoaASerPesquisada", id);
-        Client client = query.getSingleResult();
-        manager.remove(client);
-        manager.getTransaction().commit();
+        ClientsService clientsService = new ClientsService();
+        Client returnedClient = clientsService.deleteClient(id);
     }
 
     @PUT
     @Path("/{id}")
-    public void updateClient(@PathParam("id") int id, Client updatedInfo) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
-        TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfThePersonToBeUpdated", Client.class);
-        query.setParameter("idOfThePersonToBeUpdated", id);
-        Client client = query.getSingleResult();
-        client.setName(updatedInfo.getName());
-        manager.merge(client);
-        manager.getTransaction().commit();
+    public Client updateClient(@PathParam("id") int id, Client updatedInfo) {
+        ClientsService clientsService = new ClientsService();
+        Client returnedClient = clientsService.updateClient(id, updatedInfo);
+        return returnedClient;
     }
 
 

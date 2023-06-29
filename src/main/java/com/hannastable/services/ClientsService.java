@@ -28,4 +28,17 @@ public class ClientsService {
         Client returnedClient = clientsDao.getOneClient(id);
         return returnedClient;
     }
+
+    public Client deleteClient(int id){
+        ClientsDao clientsDao = new ClientsDao();
+        Client returnedClient = clientsDao.deleteClient(id);
+        return returnedClient;
+    }
+
+    public Client updateClient(int id, Client updatedInfo){
+        ClientsDao clientsDao = new ClientsDao();
+        Client returnedClient = clientsDao.updateClient(id, updatedInfo);
+        return returnedClient;
+    }
 }
+
