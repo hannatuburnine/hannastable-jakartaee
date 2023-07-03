@@ -2,6 +2,8 @@ package com.hannastable.resources;
 
 import com.hannastable.models.Client;
 import com.hannastable.models.Order;
+import com.hannastable.services.ClientsService;
+import com.hannastable.services.OrdersService;
 import jakarta.persistence.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -16,21 +18,25 @@ public class OrdersResource {
 
     @POST
     @Path("/client/{id}")
-    public void createOneOrder(@PathParam("id") int id, Order order){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
-        manager.persist(order);
-        manager.getTransaction().commit();
+    public Order createOneOrder(@PathParam("id") int id, Order order) throws Exception{
+        OrdersService ordersService = new OrdersService();
+        Order returnedOrder = ordersService.createOneOrder(id, order);
+        return returnedOrder;
     }
 
     @GET
     @Path("/orders")
     public ArrayList<Order> getAllOrders(){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
-        TypedQuery<Order> query = manager.createQuery("SELECT D FROM Order D JOIN D.client", Order.class);
-        ArrayList<Order> listOrder = (ArrayList<Order>) query.getResultList();
-        return listOrder;
+        OrdersService ordersService = new OrdersService();
+        ArrayList<Order> returnedOrder = ordersService.getAllOrders();
+        return returnedOrder;
+    }
+
+    @GET
+    @Path("/{id}")
+    public Order getOneorder(@PathParam("id") int id){
+        OrdersService ordersService = new OrdersService();
+        Order returnedOrder = ordersService.getOneOrder(id);
+        return returnedOrder;
     }
 }
