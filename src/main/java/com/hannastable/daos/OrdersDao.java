@@ -36,4 +36,30 @@ public class OrdersDao {
         Order order = (Order) query.getSingleResult();
         return order;
     }
+
+    public Order deleteOrder(int id){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        TypedQuery<Order> query = manager.createQuery("SELECT O FROM Order O WHERE O.id = :idOfTheOrder", Order.class);
+        query.setParameter("idOfTheOrder", id);
+        Order order = query.getSingleResult();
+        manager.remove(order);
+        manager.getTransaction().commit();
+        return null;
+    }
+
+    public Order updateOrder(int id, Order updatedPrice){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        TypedQuery<Order> query = manager.createQuery("SELECT O FROM Order O WHERE O.id = :idOfTheOrderToUpdate", Order.class);
+        query.setParameter("idOfTheOrderToUpdate", id);
+        Order order = query.getSingleResult();
+        order.setPrice(updatedPrice.getPrice());
+        manager.merge(order);
+        manager.getTransaction().commit();
+        return order;
+    }
+    
 }

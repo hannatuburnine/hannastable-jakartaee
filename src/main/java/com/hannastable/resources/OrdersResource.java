@@ -39,4 +39,20 @@ public class OrdersResource {
         Order returnedOrder = ordersService.getOneOrder(id);
         return returnedOrder;
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Order deleteOrder(@PathParam("id") int id){
+    OrdersService ordersService = new OrdersService();
+    Order returnedOrder = ordersService.deleteOrder(id);
+    return returnedOrder;
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Order updateOrder(@PathParam("id") int id, Order updatedPrice){
+        OrdersService ordersService = new OrdersService();
+        Order returnedOrder = ordersService.updateOrder(id, updatedPrice);
+        return returnedOrder;
+    }
 }

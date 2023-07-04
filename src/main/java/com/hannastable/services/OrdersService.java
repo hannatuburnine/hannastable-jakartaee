@@ -1,6 +1,7 @@
 package com.hannastable.services;
 
 import com.hannastable.daos.OrdersDao;
+import com.hannastable.models.Client;
 import com.hannastable.models.Order;
 
 import java.lang.reflect.Array;
@@ -28,6 +29,18 @@ public class OrdersService {
     public Order getOneOrder(int id){
         OrdersDao ordersDao = new OrdersDao();
         Order returnedOrder = ordersDao.getOneOrder(id);
-        return null;
+        return returnedOrder;
+    }
+
+    public Order deleteOrder(int id){
+        OrdersDao ordersDao = new OrdersDao();
+        Order returnedOrder = ordersDao.deleteOrder(id);
+        return returnedOrder;
+    }
+
+    public Order updateOrder(int id, Order updatedPrice){
+        OrdersDao ordersDao = new OrdersDao();
+        Order returnedOrder = ordersDao.updateOrder(id, updatedPrice);
+        return returnedOrder;
     }
 }
