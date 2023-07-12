@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class OrdersDao {
 
-    public Order createOneOrder(int id, Order order){
+    public Order createOneOrder(Order order){
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();

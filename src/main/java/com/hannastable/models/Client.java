@@ -1,5 +1,8 @@
 package com.hannastable.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,6 +20,10 @@ public class Client {
     @Column(name = "CLIENT_NAME")
     private String name;
 
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
 

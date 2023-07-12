@@ -1,5 +1,6 @@
 package com.hannastable.services;
 
+import com.hannastable.daos.ClientsDao;
 import com.hannastable.daos.OrdersDao;
 import com.hannastable.models.Client;
 import com.hannastable.models.Order;
@@ -12,7 +13,10 @@ public class OrdersService {
     public Order createOneOrder(int id, Order order) throws Exception{
         if (order.getPrice() >= 0 && order.getId() != 0) {
             OrdersDao ordersDao = new OrdersDao();
-            Order returnedOrder = ordersDao.createOneOrder(id, order);
+            ClientsDao clientsDao = new ClientsDao();
+            Client client = clientsDao.getOneClient(id);
+            order.setClient(client);
+            Order returnedOrder = ordersDao.createOneOrder(order);
             return returnedOrder;
         } else {
             throw new Exception("Invalid Order");
