@@ -20,10 +20,7 @@ public class Client {
     @Column(name = "CLIENT_NAME")
     private String name;
 
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
-    @JsonIdentityReference(alwaysAsId=true)
+
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
 

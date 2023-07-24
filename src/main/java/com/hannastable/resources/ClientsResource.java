@@ -1,6 +1,7 @@
 package com.hannastable.resources;
 
 import com.hannastable.daos.ClientsDao;
+import com.hannastable.dtos.ClientDTO;
 import com.hannastable.models.Client;
 import com.hannastable.services.ClientsService;
 import jakarta.persistence.*;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 public class ClientsResource {
 
     @GET
-    public ArrayList<Client> getAllClients() {
+    public ArrayList<ClientDTO> getAllClients() {
         ClientsService clientsService = new ClientsService();
-        ArrayList<Client> clientList = clientsService.getAllClients();
+        ArrayList<ClientDTO> clientList = clientsService.getAllClients();
         return clientList;
     }
 

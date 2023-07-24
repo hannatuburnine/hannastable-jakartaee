@@ -29,10 +29,12 @@
       <version>42.6.0</version>
     </dependency>
 
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.12.5</version> <!-- Versão pode variar -->
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.15.2</version>
     </dependency>
 
     <dependency>
