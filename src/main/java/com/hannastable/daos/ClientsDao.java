@@ -45,7 +45,7 @@ public class ClientsDao {
         Client client = query.getSingleResult();
         manager.remove(client);
         manager.getTransaction().commit();
-        return null;
+        return client;
     }
 
     public Client updateClient(int id, Client updatedInfo){
@@ -59,6 +59,11 @@ public class ClientsDao {
         manager.merge(client);
         manager.getTransaction().commit();
         return client;
+    }
+
+    public void createManager(){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManager manager = factory.createEntityManager();
     }
 
 }

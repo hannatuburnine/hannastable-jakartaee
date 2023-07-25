@@ -6,7 +6,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class OrdersDao {
@@ -46,7 +45,7 @@ public class OrdersDao {
         Order order = query.getSingleResult();
         manager.remove(order);
         manager.getTransaction().commit();
-        return null;
+        return order;
     }
 
     public Order updateOrder(int id, Order updatedPrice){

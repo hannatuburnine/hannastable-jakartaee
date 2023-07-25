@@ -2,6 +2,7 @@ package com.hannastable.services;
 
 import com.hannastable.daos.ClientsDao;
 import com.hannastable.daos.OrdersDao;
+import com.hannastable.dtos.OrderDTO;
 import com.hannastable.models.Client;
 import com.hannastable.models.Order;
 
@@ -23,10 +24,20 @@ public class OrdersService {
         }
     }
 
-    public ArrayList<Order> getAllOrders() {
+    public ArrayList<OrderDTO> getAllOrders() {
         OrdersDao ordersDao = new OrdersDao();
         ArrayList<Order> returnedOrder = ordersDao.getAllOrders();
-        return returnedOrder;
+        ArrayList<OrderDTO> ordersDTO = new ArrayList<>();
+
+        for (int i = 0; i < returnedOrder.size(); i++){
+            Order order = returnedOrder.get(i);
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(order.getId());
+            orderDTO.setPrice(order.getPrice());
+
+            ordersDTO.add(orderDTO);
+        }
+        return ordersDTO;
     }
 
 
@@ -36,10 +47,9 @@ public class OrdersService {
         return returnedOrder;
     }
 
-    public Order deleteOrder(int id){
+    public void deleteOrder(int id){
         OrdersDao ordersDao = new OrdersDao();
         Order returnedOrder = ordersDao.deleteOrder(id);
-        return returnedOrder;
     }
 
     public Order updateOrder(int id, Order updatedPrice){

@@ -1,5 +1,6 @@
 package com.hannastable.resources;
 
+import com.hannastable.dtos.OrderDTO;
 import com.hannastable.models.Client;
 import com.hannastable.models.Order;
 import com.hannastable.services.ClientsService;
@@ -25,10 +26,10 @@ public class OrdersResource {
     }
 
     @GET
-    @Path("/orders")
-    public ArrayList<Order> getAllOrders(){
+    @Path("orders")
+    public ArrayList<OrderDTO> getAllOrders(){
         OrdersService ordersService = new OrdersService();
-        ArrayList<Order> returnedOrder = ordersService.getAllOrders();
+        ArrayList<OrderDTO> returnedOrder = ordersService.getAllOrders();
         return returnedOrder;
     }
 
@@ -42,10 +43,9 @@ public class OrdersResource {
 
     @DELETE
     @Path("/{id}")
-    public Order deleteOrder(@PathParam("id") int id){
+    public void deleteOrder(@PathParam("id") int id){
     OrdersService ordersService = new OrdersService();
     Order returnedOrder = ordersService.deleteOrder(id);
-    return returnedOrder;
     }
 
     @PUT

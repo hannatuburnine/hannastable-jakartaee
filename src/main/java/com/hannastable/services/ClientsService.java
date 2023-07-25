@@ -51,10 +51,9 @@ public class ClientsService {
         return returnedClient;
     }
 
-    public Client deleteClient(int id){
+    public void deleteClient(int id){
         ClientsDao clientsDao = new ClientsDao();
         Client returnedClient = clientsDao.deleteClient(id);
-        return returnedClient;
     }
 
     public Client updateClient(int id, Client updatedInfo){
