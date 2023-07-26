@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ClientsDao {
 
     public Client createClient(Client client){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();
         manager.persist(client);
@@ -20,7 +20,7 @@ public class ClientsDao {
     }
 
     public ArrayList<Client> getAllClients(){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
         TypedQuery query = manager.createQuery("SELECT C FROM Client C", Client.class);
         ArrayList<Client> list = (ArrayList<Client>) query.getResultList();
@@ -28,7 +28,7 @@ public class ClientsDao {
     }
 
     public Client getOneClient(int id){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
         TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClient", Client.class);
         query.setParameter("idOfTheClient", id);
@@ -37,7 +37,7 @@ public class ClientsDao {
     }
 
     public Client deleteClient(int id){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();
         TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfThePersonToBeDeleted", Client.class);
@@ -49,7 +49,7 @@ public class ClientsDao {
     }
 
     public Client updateClient(int id, Client updatedInfo){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
+        EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
         manager.getTransaction().begin();
         TypedQuery<Client> query = manager.createQuery("SELECT C FROM Client C WHERE C.id = :idOfTheClientToBeUpdated", Client.class);
@@ -61,9 +61,8 @@ public class ClientsDao {
         return client;
     }
 
-    public void createManager(){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("hannastabledb_pu");
-        EntityManager manager = factory.createEntityManager();
+    public EntityManagerFactory createEntityManagerFactory(){
+        return Persistence.createEntityManagerFactory("hannastabledb_pu");
     }
 
 }

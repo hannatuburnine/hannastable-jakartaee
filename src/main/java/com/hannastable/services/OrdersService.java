@@ -6,7 +6,6 @@ import com.hannastable.dtos.OrderDTO;
 import com.hannastable.models.Client;
 import com.hannastable.models.Order;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OrdersService {
@@ -47,9 +46,10 @@ public class OrdersService {
         return returnedOrder;
     }
 
-    public void deleteOrder(int id){
+    public Order deleteOrder(int id){
         OrdersDao ordersDao = new OrdersDao();
         Order returnedOrder = ordersDao.deleteOrder(id);
+        return returnedOrder;
     }
 
     public Order updateOrder(int id, Order updatedPrice){
