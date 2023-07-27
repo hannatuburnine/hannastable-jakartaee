@@ -1,26 +1,10 @@
-package com.hannastable.models;
+package com.hannastable.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+public class IngredientsDTO {
 
-@Table(name = "INGREDIENTS")
-@Entity
-public class Ingredients {
-
-    @Id
-    @Column(name = "INGREDIENT_NAME")
     private String ingredientName;
-
-    @Column(name = "EXPIRING_DATE")
     private int expiringDate;
-
-    @Column(name = "BATCH")
     private double batch;
-
-    @JoinColumn(name = "DISHES_FK")
-    @ManyToOne
-    @JsonIgnore
-    private Dishes dish;
 
     public String getIngredientName() {
         return ingredientName;
