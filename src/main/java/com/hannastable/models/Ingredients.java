@@ -17,10 +17,10 @@ public class Ingredients {
     @Column(name = "BATCH")
     private double batch;
 
-    @JoinColumn(name = "DISHES_FK")
-    @ManyToOne
     @JsonIgnore
-    private Dishes dish;
+    @ManyToOne
+    @JoinColumn(name = "DISH_FK")
+    private Dish dish;
 
     public String getIngredientName() {
         return ingredientName;
@@ -44,5 +44,13 @@ public class Ingredients {
 
     public void setBatch(double batch) {
         this.batch = batch;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }

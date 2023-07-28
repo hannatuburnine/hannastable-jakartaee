@@ -1,11 +1,7 @@
 package com.hannastable.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +15,6 @@ public class Client {
 
     @Column(name = "CLIENT_NAME")
     private String name;
-
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders;

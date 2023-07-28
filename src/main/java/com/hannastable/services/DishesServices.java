@@ -1,29 +1,29 @@
 package com.hannastable.services;
 
 import com.hannastable.daos.DishesDao;
-import com.hannastable.dtos.DishesDTO;
+import com.hannastable.dtos.DishDTO;
 import com.hannastable.dtos.IngredientsDTO;
-import com.hannastable.models.Dishes;
+import com.hannastable.models.Dish;
 import com.hannastable.models.Ingredients;
 
 import java.util.ArrayList;
 
 public class DishesServices {
 
-    public Dishes getOneDish(int id){
+    public Dish getOneDish(int id){
         DishesDao dishesDao = new DishesDao();
-        Dishes returnedDish = dishesDao.getOneDish(id);
+        Dish returnedDish = dishesDao.getOneDish(id);
         return returnedDish;
     }
 
-    public ArrayList<Dishes> getAllDishes(){
+    public ArrayList<DishDTO> getAllDishes(){
         DishesDao dishesDao = new DishesDao();
-        ArrayList<Dishes> returnedDish = new ArrayList<>();
-        ArrayList<Dishes> dishesDTO = dishesDao.getAllDishes();
+        ArrayList<Dish> returnedDish = dishesDao.getAllDishes();
+        ArrayList<DishDTO> dishesDTO = new ArrayList<>();
 
         for (int i = 0; i < returnedDish.size(); i++){
-            Dishes dish = returnedDish.get(i);
-            DishesDTO dishDTO = new DishesDTO();
+            Dish dish = returnedDish.get(i);
+            DishDTO dishDTO = new DishDTO();
             dishDTO.setName(dish.getName());
             dishDTO.setId(dish.getId());
 
@@ -39,5 +39,16 @@ public class DishesServices {
             }
         }
        return dishesDTO;
+    }
+
+    public Dish createDish(Dish dish) throws Exception {
+        if (dish.getName().length() <= 10 && dish.getName().isBlank() == false) {
+            DishesDao dishesDao = new DishesDao();
+            Dish returnedDish = dishesDao.createDish(dish);
+            return returnedDish;
+        } else {
+            throw new Exception("Nome inválido");
+        }
+
     }
 }

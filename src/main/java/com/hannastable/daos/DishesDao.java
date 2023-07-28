@@ -1,7 +1,6 @@
 package com.hannastable.daos;
 
-import com.hannastable.dtos.DishesDTO;
-import com.hannastable.models.Dishes;
+import com.hannastable.models.Dish;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -11,24 +10,35 @@ import java.util.ArrayList;
 
 public class DishesDao {
 
-    public Dishes getOneDish(int id){
+    public Dish getOneDish(int id){
         EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
-        TypedQuery<Dishes> query = (TypedQuery<Dishes>) manager.createQuery("SELECT D FROM Dishes D WHERE D.id = :idOfTheDish", Dishes.class);
+        TypedQuery<Dish> query = (TypedQuery<Dish>) manager.createQuery("SELECT D FROM Dish D WHERE D.id = :idOfTheDish", Dish.class);
         query.setParameter("idOfTheDish", id);
-        Dishes dish = query.getSingleResult();
+        Dish dish = query.getSingleResult();
         return dish;
     }
 
-    public ArrayList<Dishes> getAllDishes(){
+    public ArrayList<Dish> getAllDishes(){
         EntityManagerFactory factory = createEntityManagerFactory();
         EntityManager manager = factory.createEntityManager();
-        TypedQuery<Dishes> query = manager.createQuery("SELECT D FROM Dishes D", Dishes.class);
-        ArrayList<Dishes> list = (ArrayList<Dishes>) query.getResultList();
+        TypedQuery<Dish> query = manager.createQuery("SELECT D FROM Dish D", Dish.class);
+        ArrayList<Dish> list = (ArrayList<Dish>) query.getResultList();
         return list;
+    }
+
+    public Dish createDish(Dish dish) {
+        EntityManagerFactory factory = createEntityManagerFactory();
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        manager.persist(dish);
+        manager.getTransaction().commit();
+        return dish;
     }
 
     public EntityManagerFactory createEntityManagerFactory(){
         return Persistence.createEntityManagerFactory("hannastabledb_pu");
     }
+
+
 }
