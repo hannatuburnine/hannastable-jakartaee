@@ -34,4 +34,20 @@ public class DishesResource {
         Dish returnedDish = dishesServices.createDish(dish);
         return returnedDish;
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Dish removeDish(@PathParam("id") int id){
+        DishesServices dishesServices = new DishesServices();
+        Dish returnedDish = dishesServices.removeDish(id);
+        return returnedDish;
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Dish updateDish(@PathParam("id") int id){
+        DishesServices dishesServices = new DishesServices();
+        Dish returnedDish = dishesServices.updateDish(id);
+        return returnedDish;
+    }
 }

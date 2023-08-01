@@ -1,6 +1,6 @@
 package com.hannastable.dtos;
 
-public class IngredientsDTO {
+public class IngredientDTO {
 
     private String ingredientName;
     private int expiringDate;

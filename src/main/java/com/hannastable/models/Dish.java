@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-
 @Entity
 @Table(name = "DISHES")
 public class Dish {
@@ -16,7 +15,7 @@ public class Dish {
     private double price;
 
     @OneToMany(mappedBy = "dish")
-    private List<Ingredients> ingredients;
+    private List<Ingredient> ingredients;
 
     @Id
     @Column(name = "DISH_ID")
@@ -31,11 +30,11 @@ public class Dish {
         this.name = name;
     }
 
-    public List<Ingredients> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredients> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

@@ -2,9 +2,9 @@ package com.hannastable.services;
 
 import com.hannastable.daos.DishesDao;
 import com.hannastable.dtos.DishDTO;
-import com.hannastable.dtos.IngredientsDTO;
+import com.hannastable.dtos.IngredientDTO;
 import com.hannastable.models.Dish;
-import com.hannastable.models.Ingredients;
+import com.hannastable.models.Ingredient;
 
 import java.util.ArrayList;
 
@@ -28,9 +28,9 @@ public class DishesServices {
             dishDTO.setId(dish.getId());
 
             for (int j = 0; j < dish.getIngredients().size(); j++){
-                Ingredients ingredient = dish.getIngredients().get(j);
+                Ingredient ingredient = dish.getIngredients().get(j);
 
-                IngredientsDTO ingredientsDTO = new IngredientsDTO();
+                IngredientDTO ingredientsDTO = new IngredientDTO();
                 ingredientsDTO.setIngredientName(ingredient.getIngredientName());
                 ingredientsDTO.setExpiringDate(ingredient.getExpiringDate());
                 ingredientsDTO.setBatch(ingredient.getBatch());
@@ -50,5 +50,17 @@ public class DishesServices {
             throw new Exception("Nome inválido");
         }
 
+    }
+
+    public Dish removeDish(int id){
+        DishesDao dishesDao = new DishesDao();
+        Dish returnedDish = dishesDao.removeDish(id);
+        return returnedDish;
+    }
+
+    public Dish updateDish(int id){
+        DishesDao dishesDao = new DishesDao();
+        Dish returnedDish = dishesDao.updateDish(id);
+        return returnedDish;
     }
 }

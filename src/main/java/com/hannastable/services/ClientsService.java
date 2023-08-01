@@ -32,14 +32,14 @@ public class ClientsService {
             clientDTO.setName(client.getName());
 
             for (int j =  0; j < client.getOrders().size(); j++){
-                Order order = client.getOrders().get(j);
+               Order order = client.getOrders().get(j);
 
-                OrderDTO orderDTO = new OrderDTO();
-                orderDTO.setId(order.getId());
+               OrderDTO orderDTO = new OrderDTO();
+               orderDTO.setId(order.getId());
                 orderDTO.setPrice(order.getPrice());
 
                 clientDTO.getOrders().add(orderDTO);
-            }
+           }
             clientsDTO.add(clientDTO);
         }
         return clientsDTO;

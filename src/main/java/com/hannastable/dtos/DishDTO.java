@@ -6,7 +6,7 @@ import java.util.List;
 public class DishDTO {
 
     private String name;
-    private List<IngredientsDTO> ingredients = new ArrayList<>();
+    private List<IngredientDTO> ingredients = new ArrayList<>();
     private int id;
     private double price;
 
@@ -18,11 +18,11 @@ public class DishDTO {
         this.name = name;
     }
 
-    public List<IngredientsDTO> getIngredients() {
+    public List<IngredientDTO> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<IngredientsDTO> ingredients) {
+    public void setIngredients(List<IngredientDTO> ingredients) {
         this.ingredients = ingredients;
     }
 
