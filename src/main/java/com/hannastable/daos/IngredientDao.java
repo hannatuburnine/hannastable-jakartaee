@@ -38,6 +38,18 @@ public class IngredientDao {
         return ingredient;
     }
 
+    public Ingredient updateIngredient(String ingredientName){
+        EntityManagerFactory factory = createEntityManagerFactory();
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        TypedQuery<Ingredient> query = manager.createQuery("SELECT I FROM Ingredient I WHERE I.ingredientName = :nameOfTheIngredient", Ingredient.class);
+        query.setParameter("nameOfTheIngredient", ingredientName);
+        Ingredient ingredientToUpdate = query.getSingleResult();
+        manager.merge(ingredientToUpdate);
+        manager.getTransaction().commit();
+        return ingredientToUpdate;
+    }
+
     public EntityManagerFactory createEntityManagerFactory(){
         return Persistence.createEntityManagerFactory("hannastabledb_pu");
     }

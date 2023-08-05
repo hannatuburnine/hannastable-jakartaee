@@ -37,4 +37,10 @@ public class IngredientService {
         Ingredient returnedIngredient = ingredientDao.createIngredient(ingredient);
         return returnedIngredient;
     }
+
+    public Ingredient updateIngredient(String ingredientName){
+        IngredientDao ingredientDao = new IngredientDao();
+        Ingredient returnedIngredient = ingredientDao.updateIngredient(ingredientName);
+        return returnedIngredient;
+    }
 }

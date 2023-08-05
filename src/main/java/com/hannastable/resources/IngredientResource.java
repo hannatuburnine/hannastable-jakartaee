@@ -38,4 +38,12 @@ public class IngredientResource {
         return null;
     }
 
+    @PUT
+    @Path("/{ingredientName}")
+    public Ingredient updateIngredient(@PathParam("ingredientName") String ingredientName){
+        IngredientService ingredientService = new IngredientService();
+        Ingredient returnedIngredient = ingredientService.updateIngredient(ingredientName);
+        return returnedIngredient;
+    }
+
 }
